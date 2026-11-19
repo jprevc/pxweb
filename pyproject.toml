@@ -1,0 +1,72 @@
+[project]
+name = "pxweb-client"
+dynamic = ["version"]
+description = "Python client for the PxWeb API v1, used by many national statistics offices"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = ["httpx>=0.27"]
+keywords = ["pxweb", "statistics", "open-data", "json-stat", "official-statistics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+[project.urls]
+Homepage = "https://github.com/jprevc/pxweb"
+Repository = "https://github.com/jprevc/pxweb"
+Issues = "https://github.com/jprevc/pxweb/issues"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.1",
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/pxweb/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pxweb"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/pxweb", "tests", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 140
+target-version = "py310"
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+files = ["src", "tests"]
+python_version = "3.10"
+strict = true
+
+[[tool.mypy.overrides]]
+# Tests needn't be annotated, but annotated-or-not their bodies are still checked.
+module = "tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+disallow_untyped_calls = false
+check_untyped_defs = true
