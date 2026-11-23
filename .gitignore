@@ -6,3 +6,11 @@ build/
 *.egg-info/
 .pytest_cache/
 .ruff_cache/
+
+# JetBrains IDE: per-user state and machine-specific interpreter config
+.idea/workspace.xml
+.idea/shelf/
+.idea/httpRequests/
+.idea/dbnavigator.xml
+.idea/*.iml
+.idea/modules.xml
